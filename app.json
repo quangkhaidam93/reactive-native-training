@@ -1,0 +1,17 @@
+{
+  "name": "react_native_training",
+  "displayName": "react_native_training",
+  "expo": {
+    "name": "react_native_training",
+    "slug": "expo-template-bare",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
