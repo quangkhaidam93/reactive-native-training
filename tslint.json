@@ -1,0 +1,30 @@
+{
+    "extends": [
+        "tslint:recommended",
+        "tslint-eslint-rules",
+        "tslint-react",
+        "tslint-config-prettier"
+    ],
+    "jsRules": {},
+    "rules": {
+        "interface-name": false,
+        "jsx-no-lambda": false,
+        "object-literal-sort-keys": false,
+        "quotemark": [
+            false
+        ],
+        "no-empty-interface": false,
+        "class-name": false,
+        "member-access": false,
+        "jsx-boolean-value": false,
+        "jsx-no-string-ref": false,
+        "no-console": false,
+        "curly": false,
+        "no-var-requires": false,
+        "no-unused-expression": false,
+        "radix": false,
+        "no-shadowed-variable": false,
+        "no-string-literal": false,
+        "triple-equals" : false
+    }
+}
