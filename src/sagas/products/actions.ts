@@ -1,4 +1,4 @@
-import { IGetProductsRequestAction, ProductsActionTypes, IGetProductsSuccessAction, IGetProductFailureAction, ICreateProductRequestAction, ICreateProductSuccessstAction, ICreateProductFailureAction, IEditProductRequestAction, IEditProductSuccessAction, IEditProductFailureAction, IDeleteProductRequestAction, IDeleteProductSuccessAction, IDeleteProductFailuretAction } from './types';
+import { IGetProductsRequestAction, ProductsActionTypes, IGetProductsSuccessAction, IGetProductFailureAction, ICreateProductRequestAction, ICreateProductSuccessstAction, ICreateProductFailureAction, IEditProductRequestAction, IEditProductSuccessAction, IEditProductFailureAction, IDeleteProductRequestAction, IDeleteProductSuccessAction, IDeleteProductFailuretAction, ILoadmoreProductRequestAction, ILoadmoreProductSuccessAction, ILoadmoreProductFailureAction, IRefreshProductsRequestAction, IRefreshProductsSuccessAction, IRefreshProductFailureAction } from './types';
 import { ProductModel } from 'models/Product';
 
 export function GetProductsRequest(): IGetProductsRequestAction {
@@ -7,9 +7,10 @@ export function GetProductsRequest(): IGetProductsRequestAction {
     }
 }
 
-export function GetProductsSuccess(): IGetProductsSuccessAction {
+export function GetProductsSuccess(payload: ProductModel[]): IGetProductsSuccessAction {
     return {
-        type: ProductsActionTypes.GET_PRODUCTS_SUCCESS
+        type: ProductsActionTypes.GET_PRODUCTS_SUCCESS,
+        payload
     }
 }
 
@@ -74,5 +75,44 @@ export function DeleteProductSuccess(): IDeleteProductSuccessAction {
 export function DeleteProductFailure(): IDeleteProductFailuretAction {
     return {
         type: ProductsActionTypes.DELETE_PRODUCT_FAILURE
+    }
+}
+
+export function LoadmoreProductRequest(payload: number): ILoadmoreProductRequestAction {
+    return {
+        type: ProductsActionTypes.LOADMORE_PRODUCT_REQUEST,
+        payload
+    }
+}
+
+export function LoadmoreProductSuccess(payload: ProductModel[]): ILoadmoreProductSuccessAction {
+    return {
+        type: ProductsActionTypes.LOADMORE_PRODUCT_SUCCESS,
+        payload
+    }
+}
+
+export function LoadmoreProductFailure(): ILoadmoreProductFailureAction {
+    return {
+        type: ProductsActionTypes.LOADMORE_PRODUCT_FAILURE
+    }
+}
+
+export function RefreshProductsRequest(): IRefreshProductsRequestAction {
+    return {
+        type: ProductsActionTypes.REFRESH_PRODUCT_REQUEST,
+    }
+}
+
+export function RefreshProductsSuccess(payload: ProductModel[]): IRefreshProductsSuccessAction {
+    return {
+        type: ProductsActionTypes.REFRESH_PRODUCT_SUCCESS,
+        payload
+    }
+}
+
+export function RefreshProductFailure(): IRefreshProductFailureAction {
+    return {
+        type: ProductsActionTypes.REFRESH_PRODUCT_FAILURE
     }
 }

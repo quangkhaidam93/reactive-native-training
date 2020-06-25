@@ -19,12 +19,12 @@ module.exports = function(api) {
             '.json',
           ],
           alias: {
-            // screens: './src/screens',
             // navigation: './src/navigation',
             components: './src/components',
             // state: './src/state',
             models: './src/models',
-            sagas: './src/sagas'
+            sagas: './src/sagas',
+            screens: './src/screens'
           },
         },
       ],

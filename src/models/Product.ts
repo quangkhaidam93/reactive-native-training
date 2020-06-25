@@ -1,4 +1,6 @@
 export interface ProductModel {
     id: number,
-    name: string
+    productName: string,
+    thumbImage: string,
+    thumbHeight: number
 }
