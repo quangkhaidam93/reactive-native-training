@@ -3,15 +3,15 @@ import React from "react";
 import Home from "screens/Home";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import productsReducer from "sagas/products/reducer";
 import createSagaMiddleware from "redux-saga";
-import { productsWatcher } from "sagas/products/saga";
 import { NavigationContainer } from "@react-navigation/native";
 // import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ProductScreen from 'screens/ProductScreen';
+import { rootReducer } from 'sagas/rootReducer';
+import { rootSaga } from 'sagas/rootSaga';
 
 interface AppProps {}
 
@@ -19,9 +19,9 @@ const Tab = createBottomTabNavigator();
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(productsReducer, applyMiddleware(sagaMiddleware));
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
-sagaMiddleware.run(productsWatcher);
+sagaMiddleware.run(rootSaga);
 
 const App: React.FC<AppProps> = ({}) => {
   return (

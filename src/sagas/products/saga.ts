@@ -24,7 +24,6 @@ export function* fetchProducts() {
 
 export function* loadmoreProducts(action: any) {
     try {
-        console.log('Loadmore triggered');
         const response = yield call(() => axios.get('https://api.uat.aladin.today/public/v0.3.3/product?offset=' + action.payload.toString() + '&limit=24&fromKm=0&toKm=10&lat=10.7861343&lng=106.6922188&areaText=Qu%E1%BA%ADn%203,%20H%E1%BB%93%20Ch%C3%AD%20Minh'));
         const { data: {dataArray} } = response;
         const datas = dataArray.map((data: any) => {
@@ -45,7 +44,6 @@ export function* loadmoreProducts(action: any) {
 
 export function* refreshProducts() {
     try {
-        console.log('Refresh product');
         const response = yield call(() => axios.get('https://api.uat.aladin.today/public/v0.3.3/product?offset=0&limit=24&fromKm=0&toKm=10&lat=10.7861343&lng=106.6922188&areaText=Qu%E1%BA%ADn%203,%20H%E1%BB%93%20Ch%C3%AD%20Minh'));
         const { data: {dataArray} } = response;
         const datas = dataArray.map((data: any) => {
@@ -66,9 +64,6 @@ export function* refreshProducts() {
 
 export function* createProduct(action: any) {
     try {
-        console.log('create Product Saga');
-        console.log(action);
-
         const newProduct = {
             id: 11,
             name: "Product 11"

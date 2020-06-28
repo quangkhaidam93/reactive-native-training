@@ -2,25 +2,26 @@ import React, { useEffect } from 'react';
 import { FlatList, StyleSheet, ActivityIndicator, View, RefreshControl } from 'react-native';
 import Product from './Product';
 import { useSelector, useDispatch } from 'react-redux';
-// import { IStoreState } from 'sagas/reducers';
-import { ProductsActionTypes, IProductsState } from 'sagas/products/types';
 import { ProductModel } from 'models/Product';
+import { Dispatch } from 'redux';
+import { IStoreState } from 'sagas/rootReducer';
+import allActions from 'sagas/allActions';
 // import ProductListPlaceholder from './ProductListPlaceholder';
 
 
 interface IProductListProps {}
 
 const ProductList: React.FC<IProductListProps> = ({}) => {
-    const data: ProductModel[] = useSelector((state: IProductsState) => state.products);
-    const loading = useSelector((state: IProductsState) => state.loading);
-    const offset = useSelector((state: IProductsState) => state.offset);
-    const isLoadMore = useSelector((state: IProductsState) => state.isLoadMore);
-    const isRefresh = useSelector((state: IProductsState) => state.isRefresh);
-    const dispatch = useDispatch();
+    const data: ProductModel[] = useSelector((state: IStoreState) => state.productsState.products);
+    const loading: boolean = useSelector((state: IStoreState) => state.productsState.loading);
+    const offset: number = useSelector((state: IStoreState) => state.productsState.offset);
+    const isLoadMore: boolean = useSelector((state: IStoreState) => state.productsState.isLoadMore);
+    const isRefresh: boolean = useSelector((state: IStoreState) => state.productsState.isRefresh);
+    const dispatch: Dispatch = useDispatch();
 
     useEffect(() => {
         console.log('Component did mount ...');
-        dispatch({type: ProductsActionTypes.GET_PRODUCT_REQUEST});
+        dispatch(allActions.GetProductsRequest());
     }, []);
 
     // const handlePressed = () => {
@@ -34,7 +35,7 @@ const ProductList: React.FC<IProductListProps> = ({}) => {
     // }
 
     const handleLoadmore = () => {
-        dispatch({type: ProductsActionTypes.LOADMORE_PRODUCT_REQUEST, payload: offset})
+        dispatch(allActions.LoadmoreProductRequest(offset))
     }
 
     const renderFooterOnLoad = () => {
@@ -48,7 +49,7 @@ const ProductList: React.FC<IProductListProps> = ({}) => {
     }
 
     const onRefresh = () => {
-        dispatch({type: ProductsActionTypes.REFRESH_PRODUCT_REQUEST})
+        dispatch(allActions.RefreshProductsRequest())
     }
 
     console.log('rendering...');
@@ -65,7 +66,7 @@ const ProductList: React.FC<IProductListProps> = ({}) => {
                     }
                     data={data}
                     numColumns={2}
-                    renderItem={({item}) => <Product imageUrl={item.thumbImage} thumbHeight={item.thumbHeight} />}
+                    renderItem={({item}) => <Product productDetail={item} />}
                     keyExtractor={item => item.id.toString()}
                     onEndReachedThreshold={0.4}
                     onEndReached={handleLoadmore}
