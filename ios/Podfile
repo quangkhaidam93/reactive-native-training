@@ -35,6 +35,7 @@ target 'reactnativetraining' do
   pod 'DoubleConversion', :podspec => "#{rnPrefix}/third-party-podspecs/DoubleConversion.podspec"
   pod 'glog', :podspec => "#{rnPrefix}/third-party-podspecs/glog.podspec"
   pod 'Folly', :podspec => "#{rnPrefix}/third-party-podspecs/Folly.podspec"
+  pod 'RNInAppBrowser', :path => '../node_modules/react-native-inappbrowser-reborn'
 
   # Other native modules
 

@@ -24,7 +24,8 @@ module.exports = function(api) {
             // state: './src/state',
             models: './src/models',
             sagas: './src/sagas',
-            screens: './src/screens'
+            screens: './src/screens',
+            assets: './src/assets'
           },
         },
       ],

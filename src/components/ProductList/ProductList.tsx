@@ -1,11 +1,23 @@
-import React, { useEffect } from 'react';
-import { FlatList, StyleSheet, ActivityIndicator, View, RefreshControl } from 'react-native';
+import React, { useEffect, createRef, useRef, RefObject } from 'react';
+import { 
+    FlatList, 
+    StyleSheet, 
+    ActivityIndicator, 
+    View, 
+    RefreshControl,
+    Text,
+    Image
+} from 'react-native';
 import Product from './Product';
 import { useSelector, useDispatch } from 'react-redux';
 import { ProductModel } from 'models/Product';
 import { Dispatch } from 'redux';
 import { IStoreState } from 'sagas/rootReducer';
 import allActions from 'sagas/allActions';
+import Header from 'components/Header';
+import Button from 'components/Button';
+import InputValidation from 'components/InputValidation';
+import { iconsPNG } from 'assets/Icons/index';
 // import ProductListPlaceholder from './ProductListPlaceholder';
 
 
@@ -18,6 +30,8 @@ const ProductList: React.FC<IProductListProps> = ({}) => {
     const isLoadMore: boolean = useSelector((state: IStoreState) => state.productsState.isLoadMore);
     const isRefresh: boolean = useSelector((state: IStoreState) => state.productsState.isRefresh);
     const dispatch: Dispatch = useDispatch();
+
+    const myRef = useRef(null);
 
     useEffect(() => {
         console.log('Component did mount ...');
@@ -52,10 +66,29 @@ const ProductList: React.FC<IProductListProps> = ({}) => {
         dispatch(allActions.RefreshProductsRequest())
     }
 
-    console.log('rendering...');
+    let test : typeof Product | null = null;
+    test = Product;
+
+    // const Title = (color: string) => <View style={{backgroundColor: color, flex: 1}}><Text style={{textAlign: 'center'}} >Alo</Text></View>
+    console.log('ProductList rendering...');
+
     return (
         <View style={styles.container}>
-            {loading ?
+            <Header
+                centerComponent={<Button 
+                    iconName="addphoto" 
+                    // iconStyle={{width: 24, height: 24}} 
+                    raised 
+                    type="outline" 
+                    // buttonStyle={{padding: 5}}
+                    title='My button'
+                    />}
+                rightComponent={<Button raised type='outline' title='KHAI' />}
+            />
+            <InputValidation required delayTime={300} minLength={8} hasFocusEffect hasClearIcon leftIcon={"add"} placeholder="Typing..." />
+            <Text>----------------------------------------------------------------</Text>
+            <InputValidation validationType="mail" positiveNumber type="clear" leftIcon={<Text style={{width: 50}}>Alo</Text>} placeholder='Something ...' />
+            {/* {loading ?
                 <ActivityIndicator /> :
                 <FlatList
                     refreshControl={
@@ -73,7 +106,7 @@ const ProductList: React.FC<IProductListProps> = ({}) => {
                     ListFooterComponent={renderFooterOnLoad}
                 />
                 
-            }
+            } */}
             {/* <Button 
                 title="Press me"
                 onPress={handlePressed}

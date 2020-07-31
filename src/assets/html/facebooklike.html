@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body style="font-size:60px">
+        <div id="fb-root"></div>
+        <script
+            async defer crossorigin="anonymous" 
+            src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0&appId=695890714544244" 
+            nonce="szzLSHTJ"
+        >
+        </script>
+        <div
+            id="test2"
+            class="fb-like" 
+            data-href="https://developers.facebook.com/docs/plugins/" 
+            data-width="" 
+            data-layout="button_count" 
+            data-action="like" 
+            data-size="large" 
+            data-share="false"
+        >
+        </div>
+        
+        <div id="test">Alo 12345</div>
+
+        <script>
+            function handleClick() {
+                window.ReactNativeWebView.postMessage('alo');
+            }
+
+            function handleTestClick() {
+                window.ReactNativeWebView.postMessage('hello');
+            }
+
+            // FB.Event.subscribe('xfbml.render', handleClick);
+
+            var element = document.getElementById('test2');
+            element.addEventListener('click', handleClick);
+
+            var element2 = document.getElementById('test');
+            element2.addEventListener('click', handleTestClick);
+        </script>
+    </body>
+</html>

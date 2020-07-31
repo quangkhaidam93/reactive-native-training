@@ -4,16 +4,16 @@ import { ProductModel } from 'models/Product';
 
 interface IProductDetailProps {
     product: ProductModel | undefined,
-    loading: boolean
+    // loading: boolean
 }
 
-const ProductDetail: React.FC<IProductDetailProps> = ({product, loading}) => {
+const ProductDetail: React.FC<IProductDetailProps> = ({product}) => {
     
     console.log('Product Detail rendering...');
 
     return <View style={styles.container} >
         {
-            product && !loading && <View style={styles.productContainer} > 
+            product && <View style={styles.productContainer} > 
                 <Image
                     style={styles.image}
                     source={{uri: product.thumbImage}}
@@ -43,12 +43,12 @@ const styles = StyleSheet.create({
     }
 })
 
-// export default memo(ProductDetail, (prevProps, nextProps) => {
-//     return prevProps.product?.id === nextProps.product?.id 
-//         && prevProps.product?.productName === nextProps.product?.productName
-//         && prevProps.product?.thumbImage === nextProps.product?.thumbImage
-//         && prevProps.product?.thumbHeight === nextProps.product?.thumbHeight
-//         && prevProps.loading === nextProps.loading
-// });
+export default memo(ProductDetail, (prevProps, nextProps) => {
+    return prevProps.product?.id === nextProps.product?.id 
+        // && prevProps.product?.productName === nextProps.product?.productName
+        // && prevProps.product?.thumbImage === nextProps.product?.thumbImage
+        // && prevProps.product?.thumbHeight === nextProps.product?.thumbHeight
+        // && prevProps.loading === nextProps.loading
+});
 
-export default ProductDetail;
+// export default ProductDetail;

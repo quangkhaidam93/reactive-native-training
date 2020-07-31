@@ -12,6 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import ProductScreen from 'screens/ProductScreen';
 import { rootReducer } from 'sagas/rootReducer';
 import { rootSaga } from 'sagas/rootSaga';
+import LikeFanpage from './screens/LikeFanpage';
 
 interface AppProps {}
 
@@ -37,6 +38,8 @@ const App: React.FC<AppProps> = ({}) => {
                     iconName = 'ios-home' 
                   } else if (route.name === 'Product') {
                     iconName = 'logo-buffer';
+                  } else {
+                    iconName = 'ios-home'
                   }
       
                   return <Ionicons name={iconName} size={size} color={color} />;
@@ -49,6 +52,7 @@ const App: React.FC<AppProps> = ({}) => {
             >
               <Tab.Screen name="Home" component={Home} />
               <Tab.Screen name="Product" component={ProductScreen} />
+              <Tab.Screen name="FBLike" component={LikeFanpage} />
             </Tab.Navigator>
           </NavigationContainer>
       </SafeAreaProvider>
