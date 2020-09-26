@@ -8,9 +8,10 @@ const productDetailState: IProductDetailState = {
     loading: false,
 }
 
-const productDetailReducer = (state = productDetailState, action: ProductDetailActions): IProductDetailState => {
+export const productDetailReducer = (state = productDetailState, action: ProductDetailActions): IProductDetailState => {
     switch(action.type) {
         case ProductDetailActionType.GET_PRODUCT_DETAIL_REQUEST: {
+            console.log('Enter');
             return {
                 ...state,
                 loading: true

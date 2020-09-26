@@ -7,11 +7,12 @@ import { ProductModel } from 'models/Product';
 import PhoneInput from 'components/PhoneInput';
 import { WebView } from 'react-native-webview';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
+import InputValidation from 'components/InputValidation';
 
 // const myHtmlFile = require('../assets/html/facebooklike.html');
 
 const ProductScreen = ({}) => {
-    const product: ProductModel | undefined = useSelector((state: IStoreState) => state.productDetailState.product);
+    // const product: ProductModel | undefined = useSelector((state: IStoreState) => state.productDetailState.product);
     // const loading: boolean = useSelector((state: IStoreState) => state.productDetailState.loading);
     const openFacebook = async () => {
         const result = await Linking.canOpenURL('fb://page/105547547594720');
@@ -62,14 +63,18 @@ const ProductScreen = ({}) => {
         else Linking.openURL(url);
     }
 
+    const productDetail = useSelector((state: IStoreState) => state.productDetailState.product);
+
     console.log('Product Screen rendering...');
+    console.log(productDetail);
     return (
         <View style={styles.container}>
+            <InputValidation />
             {/* <ProductDetail 
                 product={product}
                 // loading={loading}
             /> */}
-            <PhoneInput />
+            {/* <PhoneInput /> */}
             {/* <PhoneInput /> */}
             {/* <WebView
                 originWhitelist={['*']}

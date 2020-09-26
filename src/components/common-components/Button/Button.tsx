@@ -11,7 +11,7 @@ import {
     ViewStyle
 } from 'react-native';
 import { iconsPNG } from 'assets/Icons';
-import { TouchableDebounce } from 'components/TouchableDebounce';
+import TouchableDebounce from 'components/common-components/TouchableDebounce/TouchableDebounce';
 
 export interface IButtonProps {
     onPress?: () => void;

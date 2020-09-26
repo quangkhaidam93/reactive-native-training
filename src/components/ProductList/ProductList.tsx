@@ -18,8 +18,9 @@ import Header from 'components/Header';
 import Button from 'components/Button';
 import InputValidation from 'components/InputValidation';
 import { iconsPNG } from 'assets/Icons/index';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { NavigationServices } from 'services/NavigationService';
 // import ProductListPlaceholder from './ProductListPlaceholder';
-
 
 interface IProductListProps {}
 
@@ -69,12 +70,17 @@ const ProductList: React.FC<IProductListProps> = ({}) => {
     let test : typeof Product | null = null;
     test = Product;
 
+    const navigateProductDetail = () => {
+        NavigationServices.navigate('ProductDetail');
+    }
+
     // const Title = (color: string) => <View style={{backgroundColor: color, flex: 1}}><Text style={{textAlign: 'center'}} >Alo</Text></View>
     console.log('ProductList rendering...');
 
     return (
         <View style={styles.container}>
-            <Header
+            <Button type='solid' buttonColor='red' iconName='gold_award' onPress={navigateProductDetail} />
+            {/* <Header
                 centerComponent={<Button 
                     iconName="addphoto" 
                     // iconStyle={{width: 24, height: 24}} 
@@ -87,8 +93,8 @@ const ProductList: React.FC<IProductListProps> = ({}) => {
             />
             <InputValidation required delayTime={300} minLength={8} hasFocusEffect hasClearIcon leftIcon={"add"} placeholder="Typing..." />
             <Text>----------------------------------------------------------------</Text>
-            <InputValidation validationType="mail" positiveNumber type="clear" leftIcon={<Text style={{width: 50}}>Alo</Text>} placeholder='Something ...' />
-            {/* {loading ?
+            <InputValidation validationType="mail" positiveNumber type="clear" leftIcon={<Text style={{width: 50}}>Alo</Text>} placeholder='Something ...' /> */}
+            {loading ?
                 <ActivityIndicator /> :
                 <FlatList
                     refreshControl={
@@ -106,11 +112,11 @@ const ProductList: React.FC<IProductListProps> = ({}) => {
                     ListFooterComponent={renderFooterOnLoad}
                 />
                 
-            } */}
-            {/* <Button 
+            }
+            {/* { <Button 
                 title="Press me"
                 onPress={handlePressed}
-            /> */}
+            />} */}
         </View>
     )
 }

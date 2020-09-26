@@ -186,7 +186,8 @@ const InputValidation : React.ForwardRefExoticComponent<React.PropsWithoutRef<II
     const keyBoardType = validationType == 'phone' ? 'phone-pad' : validationType == 'number' ? props.keyboardType ? props.keyboardType : 'number-pad' : 'default'; 
     
     return <View style={[
-        styles.container, containerStyle, {height: containerHeight}
+        styles.container, containerStyle, 
+        // {height: containerHeight}
     ]} >
         {label && <Text style={[styles.label, labelStyle]}>{label}</Text>}
         <View style={[
