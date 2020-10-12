@@ -14,6 +14,8 @@ import storeFactory from 'sagas/store';
 import { PersistGate } from "redux-persist/integration/react";
 import { createStackNavigator, StackScreenProps } from "@react-navigation/stack";
 import ProductDetail from "screens/ProductDetail/ProductDetail";
+import ImageDetail from "screens/ImageDetail/ImageDetail";
+// import ImageDetail2 from "screens/ImageDetail/ImageDetail2";
 
 const { store, persistor } = storeFactory();
 
@@ -64,7 +66,7 @@ const App: React.FC<AppProps> = ({}) => {
       <PersistGate loading={null} persistor={persistor} >
         <SafeAreaProvider>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="ProductDetail" screenOptions={{
+            <Stack.Navigator initialRouteName="ImageDetail" screenOptions={{
               title: '7hE Spine'
             }} >
               <Stack.Screen 
@@ -76,6 +78,14 @@ const App: React.FC<AppProps> = ({}) => {
                 component={ProductDetail}
                 options={{title: 'Product Detail'}}
               />
+              <Stack.Screen
+                name="ImageDetail"
+                component={ImageDetail}
+              />
+              {/* <Stack.Screen
+                name="ItemList"
+                component={}
+              /> */}
             </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaProvider>
