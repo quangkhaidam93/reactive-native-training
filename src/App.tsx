@@ -15,7 +15,9 @@ import { PersistGate } from "redux-persist/integration/react";
 import { createStackNavigator, StackScreenProps } from "@react-navigation/stack";
 import ProductDetail from "screens/ProductDetail/ProductDetail";
 import ImageDetail from "screens/ImageDetail/ImageDetail";
-// import ImageDetail2 from "screens/ImageDetail/ImageDetail2";
+import ImageDetail2 from "screens/ImageDetail/ImageDetail2";
+import PanGesture from "screens/PanGesture/PanGesture";
+import RnGestureHandler from "screens/ImageScaleAndScroll/ImageScaleAndScroll";
 
 const { store, persistor } = storeFactory();
 
@@ -80,7 +82,7 @@ const App: React.FC<AppProps> = ({}) => {
               />
               <Stack.Screen
                 name="ImageDetail"
-                component={ImageDetail}
+                component={ImageDetail2}
               />
               {/* <Stack.Screen
                 name="ItemList"

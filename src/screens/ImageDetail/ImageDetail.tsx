@@ -67,7 +67,7 @@ const ImagetItem : React.FC<ImageItemProps> = ({data}) => {
   const translation = vec.createValue(0, 0);
 
   useCode(() => {
-    console.log('Hello');
+    console.log('Hello', data.item.id);
     return block([
     // vec.set(translation, vec.add(pinch, origin, vec.multiply(-1, scale, origin))),
     cond(pinchBegan(state), vec.set(origin, adjustedFocal)),
@@ -118,51 +118,51 @@ const ImagetItem : React.FC<ImageItemProps> = ({data}) => {
 }
 
 const ImageDetail = () => {
-  const [size, setSize] = useState({width: 0, height: 0});
-  const state = new Value(State.UNDETERMINED);
-  const scale = new Value(1);
-  const focal = vec.createValue(0, 0);
-  const origin = vec.createValue(0, 0);
-  const pinch = vec.createValue(0, 0);
-  const scaleOffset = new Value(1);
-  const offset = vec.createValue(0, 0);
-  const gestureScale = new Value(1);
-  const pinchGestureHandler = onGestureEvent({
-    state,
-    scale,
-    focalX: focal.x,
-    focalY: focal.y
-  });
+  // const [size, setSize] = useState({width: 0, height: 0});
+  // const state = new Value(State.UNDETERMINED);
+  // const scale = new Value(1);
+  // const focal = vec.createValue(0, 0);
+  // const origin = vec.createValue(0, 0);
+  // const pinch = vec.createValue(0, 0);
+  // const scaleOffset = new Value(1);
+  // const offset = vec.createValue(0, 0);
+  // const gestureScale = new Value(1);
+  // const pinchGestureHandler = onGestureEvent({
+  //   state,
+  //   scale,
+  //   focalX: focal.x,
+  //   focalY: focal.y
+  // });
 
-  const adjustedFocal = vec.sub(focal, CENTER);
+  // const adjustedFocal = vec.sub(focal, CENTER);
 
-  const translation = vec.createValue(0, 0);
+  // const translation = vec.createValue(0, 0);
 
-  useCode(() => {
-    console.log('Hello');
-    return block([
-    // vec.set(translation, vec.add(pinch, origin, vec.multiply(-1, scale, origin))),
-    cond(pinchBegan(state), vec.set(origin, adjustedFocal)),
-    cond(
-      eq(state, State.ACTIVE),
-      vec.set(pinch, vec.sub(adjustedFocal, origin)),
-      // vec.set(
-      //   translation,
-      //   vec.add(pinch, origin, vec.multiply(-1, gestureScale, origin))
-      // ),
-    ),
-    cond(eq(state, State.END), [
-      // vec.set(offset, vec.add(offset, translation)),
-      // set(scaleOffset, scale),
-      // set(gestureScale, 1),
-      // vec.set(translation, 0),
-      // vec.set(focal, 0),
-      // vec.set(pinch, 0),
-      set(pinch.x, spring({from: pinch.x, to: 0})),
-      set(pinch.y, spring({from: pinch.y, to: 0})),
-      set(scale, spring({from: scale, to: 1}))
-    ])
-  ])}, [adjustedFocal, origin, pinch, scale, state])
+  // useCode(() => {
+  //   console.log('Hello');
+  //   return block([
+  //   // vec.set(translation, vec.add(pinch, origin, vec.multiply(-1, scale, origin))),
+  //   cond(pinchBegan(state), vec.set(origin, adjustedFocal)),
+  //   cond(
+  //     eq(state, State.ACTIVE),
+  //     vec.set(pinch, vec.sub(adjustedFocal, origin)),
+  //     // vec.set(
+  //     //   translation,
+  //     //   vec.add(pinch, origin, vec.multiply(-1, gestureScale, origin))
+  //     // ),
+  //   ),
+  //   cond(eq(state, State.END), [
+  //     // vec.set(offset, vec.add(offset, translation)),
+  //     // set(scaleOffset, scale),
+  //     // set(gestureScale, 1),
+  //     // vec.set(translation, 0),
+  //     // vec.set(focal, 0),
+  //     // vec.set(pinch, 0),
+  //     set(pinch.x, spring({from: pinch.x, to: 0})),
+  //     set(pinch.y, spring({from: pinch.y, to: 0})),
+  //     set(scale, spring({from: scale, to: 1}))
+  //   ])
+  // ])}, [adjustedFocal, origin, pinch, scale, state])
 
 
   // const myUri = 'https://i.imgur.com/jK9pFcx.png';
@@ -198,31 +198,31 @@ const ImageDetail = () => {
 
   const renderItem = (data: any) => {
     console.log('O day', data);
-    // return <ImagetItem data={data} />
+    return <ImagetItem data={data} key={data.item.id} />
 
-    return <View style={styles.container}>
-    <PinchGestureHandler
-      {...pinchGestureHandler}
-    >
-      <Animated.View style={[
-        StyleSheet.absoluteFill, {justifyContent: 'center', flex: 1}]} >
-        <Animated.Image
-          style={[
-            styles.image,
-            {
-              transform: [
-                ...translate(pinch),
-                ...transformOrigin(origin, { scale })
-                // ...translate(vec.add(offset, translation)),
-                // { scale }
-              ]
-            }
-          ]}
-          source={iconsPNG[data.item.imageUrl]}
-        />
-      </Animated.View>
-    </PinchGestureHandler>
-  </View>
+  //   return <View style={styles.container}>
+  //   <PinchGestureHandler
+  //     {...pinchGestureHandler}
+  //   >
+  //     <Animated.View style={[
+  //       StyleSheet.absoluteFill, {justifyContent: 'center', flex: 1}]} >
+  //       <Animated.Image
+  //         style={[
+  //           styles.image,
+  //           {
+  //             transform: [
+  //               ...translate(pinch),
+  //               ...transformOrigin(origin, { scale })
+  //               // ...translate(vec.add(offset, translation)),
+  //               // { scale }
+  //             ]
+  //           }
+  //         ]}
+  //         source={iconsPNG[data.item.imageUrl]}
+  //       />
+  //     </Animated.View>
+  //   </PinchGestureHandler>
+  // </View>
   }
 
   return <View style={{flex: 1}}>

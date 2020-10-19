@@ -1,15 +1,78 @@
-// import React from 'react';
-// import PhotoView from 'react-native-photo-view-ex';
+import React, { useRef, useState } from 'react';
+import { Dimensions, Image, View } from 'react-native';
+import ImageZoom from 'react-native-image-pan-zoom';
+import { iconsPNG } from '../../assets/Icons';
+import Carousel from 'react-native-snap-carousel';
+import { useEffect } from 'react';
 
-// const ImageDetail2 = () => {
-//   return <PhotoView
-//     source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
-//     minimumZoomScale={0.5}
-//     maximumZoomScale={3}
-//     resizeMode="center"
-//     onLoad={() => console.log("Image loaded!")}
-//     style={{width: 300, height: 300}}
-// />
-// }
+const { width, height } = Dimensions.get('window');
 
-// export default ImageDetail2;
+interface ImageItemProps {
+  data: any;
+  active: number;
+}
+
+const ImageItem : React.FC<ImageItemProps> = ({data, active}) => {
+  const imageRef = useRef<ImageZoom>(null);
+
+  useEffect(() => {
+    if (active !== data.index && imageRef) {
+      imageRef.current.reset();
+    }
+  }, [active])
+
+  return <ImageZoom 
+    cropWidth={width}
+    cropHeight={height}
+    imageWidth={width}
+    imageHeight={300}
+    minScale={1}
+    useNativeDriver={true}
+    ref={imageRef}
+  >
+    <Image
+      resizeMode='contain'
+      style={{
+        width, 
+        height: 300
+      }}
+      source={iconsPNG[data.item.imageUrl]}
+    />
+  </ImageZoom>
+}
+
+const ImageDetail2 = () => {
+  const renderItem = (data: any) => <ImageItem data={data} active={active} />
+
+  const [active, setActive] = useState<number>(0);
+
+  return <View style={{flex: 1}}>
+  <Carousel 
+    data={datas}
+    sliderWidth={width}
+    itemWidth={width}
+    renderItem={renderItem}
+    loop={true}
+    lockScrollWhileSnapping={true}
+    inactiveSlideScale={1}
+    onSnapToItem={(activeSlide) => setActive(activeSlide)}
+  />
+</View>
+}
+
+export default ImageDetail2;
+
+const datas : any[] = [
+  {
+    id: 1,
+    imageUrl: 'test_image',
+  },
+  {
+    id: 2,
+    imageUrl: 'test_image2'
+  },
+  {
+    id: 3,
+    imageUrl: 'test_image3'
+  }
+]
