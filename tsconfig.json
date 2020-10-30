@@ -84,9 +84,9 @@
     "react-dom",
     "react-native"
   ],
-  "include": [
-    "node_modules/react-native-redash/lib/typescript/v1/index.d.ts"
-  ],
+  // "include": [
+  //   "node_modules/react-native-redash/lib/typescript/v1/index.d.ts"
+  // ],
   "exclude":[
     "build", 
     "node_modules",

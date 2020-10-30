@@ -4,6 +4,9 @@ import ImageZoom from 'react-native-image-pan-zoom';
 import { iconsPNG } from '../../assets/Icons';
 import Carousel from 'react-native-snap-carousel';
 import { useEffect } from 'react';
+import FastImage from 'react-native-fast-image';
+
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -15,13 +18,15 @@ interface ImageItemProps {
 const ImageItem : React.FC<ImageItemProps> = ({data, active}) => {
   const imageRef = useRef<ImageZoom>(null);
 
+  console.log(data);
+
   useEffect(() => {
     if (active !== data.index && imageRef) {
-      imageRef.current.reset();
+      imageRef.current.resetScale();
     }
   }, [active])
 
-  return <ImageZoom 
+  return <ImageZoom  
     cropWidth={width}
     cropHeight={height}
     imageWidth={width}
@@ -29,20 +34,32 @@ const ImageItem : React.FC<ImageItemProps> = ({data, active}) => {
     minScale={1}
     useNativeDriver={true}
     ref={imageRef}
+    onClick={() => console.log('Pressed')}
   >
-    <Image
-      resizeMode='contain'
-      style={{
-        width, 
-        height: 300
-      }}
-      source={iconsPNG[data.item.imageUrl]}
-    />
+      {/* <Image
+        resizeMode='contain'
+        style={{
+          width, 
+          height: 300
+        }}
+        source={iconsPNG[data.item.imageUrl]}
+      /> */}
+      <FastImage
+        style={{
+          width,
+          height: '100%'
+        }}
+        source={iconsPNG[data.item.imageUrl]}
+        resizeMode={FastImage.resizeMode.contain}
+      />
   </ImageZoom>
 }
 
 const ImageDetail2 = () => {
-  const renderItem = (data: any) => <ImageItem data={data} active={active} />
+  const renderItem = (data: any) => {
+    console.log('renderItem', data.index);
+    return <ImageItem data={data} active={active} />
+  }
 
   const [active, setActive] = useState<number>(0);
 
@@ -53,7 +70,7 @@ const ImageDetail2 = () => {
     itemWidth={width}
     renderItem={renderItem}
     loop={true}
-    lockScrollWhileSnapping={true}
+    lockScrollWhileSnapping={false}
     inactiveSlideScale={1}
     onSnapToItem={(activeSlide) => setActive(activeSlide)}
   />

@@ -18,6 +18,7 @@ import ImageDetail from "screens/ImageDetail/ImageDetail";
 import ImageDetail2 from "screens/ImageDetail/ImageDetail2";
 import PanGesture from "screens/PanGesture/PanGesture";
 import RnGestureHandler from "screens/ImageScaleAndScroll/ImageScaleAndScroll";
+import CarouselText from 'screens/CarouselText/CarouselText';
 
 const { store, persistor } = storeFactory();
 
@@ -82,7 +83,7 @@ const App: React.FC<AppProps> = ({}) => {
               />
               <Stack.Screen
                 name="ImageDetail"
-                component={ImageDetail2}
+                component={CarouselText}
               />
               {/* <Stack.Screen
                 name="ItemList"
